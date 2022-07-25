@@ -3,15 +3,34 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var dotenv = require('dotenv')
+var cors = require("cors");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const openRoutes = require("./AppModule/baseRoutes/routes.open");
+const mongoose = require('mongoose');
 
 var app = express();
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
+
+dotenv.config()
+
+mongoose.connect(process.env.DB_DEV, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+
+// mongoose.set("useFindAndModify", false);
+mongoose.connection.on("connected", () => {
+  console.log("Connected To Data Base ...");
+});
+
+app.use(cors());
+
+app.use("/images", express.static('./uploads/'));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -25,6 +44,12 @@ app.get('/firstroute', (req, res) => {
     message: 'ok'
   })
 })
+
+
+
+app.use(openRoutes)
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
