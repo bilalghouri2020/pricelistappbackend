@@ -13,17 +13,18 @@ const AuthController = {
             }
             
             const password = await passwordEncryption(req.body.password)
-            console.log("password......", password);
+            
             const userObject = {
                 fullname: req.body.fullname,
                 phone: req.body.phone,
                 email: req.body.email.toLowerCase(),
                 password: password
             };
-            console.log("userObject......", userObject);
+            
             let result = await createUser(userObject);
-            console.log("result......", result);
+            
             delete userObject.password
+            
             return res.status(201).json({
                 status: 201,
                 data: userObject,

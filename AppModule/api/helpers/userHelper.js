@@ -21,7 +21,7 @@ exports.existingUserByEmail = async (email) =>  {
     }
 }
 
-exports.passwordEncryption = async () => {
+exports.passwordEncryption = async (password) => {
     try {
         const algorithm = process.env.ENCRYPTION_ALGORITHM
         const cipher = crypto.createHash(algorithm)
