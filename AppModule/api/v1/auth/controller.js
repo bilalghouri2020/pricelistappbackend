@@ -1,10 +1,10 @@
-const { existingUserByEmail, passwordEncryption, createUser } = require("../../helpers/userHelper")
+const { existingUserByPhoneNumber, passwordEncryption, createUser } = require("../../helpers/userHelper")
 
 const AuthController = {
     signup: async (req, res, next) => {
 
         try {
-            const isUser = await existingUserByEmail(req.body.email)
+            const isUser = await existingUserByPhoneNumber(req.body.phone)
             if (isUser) {
                 res.json({
                     error: 'user already exist'
@@ -17,7 +17,7 @@ const AuthController = {
             const userObject = {
                 fullname: req.body.fullname,
                 phone: req.body.phone,
-                email: req.body.email.toLowerCase(),
+                company: req.body.company,
                 password: password
             };
             
@@ -33,7 +33,6 @@ const AuthController = {
         } catch (error) {
             next(error)
         }
-
     }
 }
 

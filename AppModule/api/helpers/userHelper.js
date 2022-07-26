@@ -11,9 +11,9 @@ exports.createUser = async (object) => {
         return null
     }
 }
-exports.existingUserByEmail = async (email) =>  {
+exports.existingUserByPhoneNumber = async (phone) =>  {
     try {
-        const user = await UserModel.findOne({email: email}).lean().select("+password").exec();
+        const user = await UserModel.findOne({phone: phone}).lean().select("+password").exec();
         return user
     } catch (error) {
         console.log(error)

@@ -12,9 +12,11 @@ const userSchema = new mongoose.Schema({
         minlength: 3,
         maxlength: 30
     },
-    email: {
+    company: {
         type: String,
-        required: true
+        required: true,
+        minlength: 3,
+        maxlength: 30
     },
     password: {
         type: String,

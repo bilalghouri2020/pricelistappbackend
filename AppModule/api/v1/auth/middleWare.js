@@ -7,7 +7,7 @@ exports.ValidateSignUp = (req, res, next) => {
         const schema = Joi.object({
             fullname: Joi.string().required().min(3).max(30),
             phone: Joi.string().required().min(11).max(16),
-            email: Joi.string().required().email(),
+            company: Joi.string().required().min(3).max(30),
             password: Joi.string().required().min(6).max(30)
         })
         const { error } = schema.validate(req.body)
