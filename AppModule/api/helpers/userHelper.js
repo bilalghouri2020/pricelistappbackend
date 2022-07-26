@@ -14,6 +14,7 @@ exports.createUser = async (object) => {
 exports.existingUserByPhoneNumber = async (phone) =>  {
     try {
         const user = await UserModel.findOne({phone: phone}).lean().select("+password").exec();
+        console.log("user....", user)
         return user
     } catch (error) {
         console.log(error)

@@ -24,3 +24,24 @@ exports.ValidateSignUp = (req, res, next) => {
         next(error);
     }
 }
+
+exports.ValidateLogin = (req, res, next) => {
+    try {
+        
+        const schema = Joi.object({
+            phone: Joi.string().required(),
+            password: Joi.string().required()
+        })
+        const {error} = schema.validate(req.body)
+        if(error) {
+            res.json({
+                error: 'ok'
+            })
+            return
+        }
+        next()
+
+    } catch (error) {
+        next(error)
+    }
+}
