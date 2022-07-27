@@ -8,7 +8,9 @@ var cors = require("cors");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const openRoutes = require("./AppModule/baseRoutes/routes.open");
+const closeRoutes = require("./AppModule/baseRoutes/routes.close");
 const mongoose = require('mongoose');
+const { verifyUser } = require('./AppModule/baseRoutes/controller');
 
 var app = express();
 
@@ -48,7 +50,7 @@ app.get('/firstroute', (req, res) => {
 
 
 app.use(openRoutes)
-
+app.use(verifyUser, closeRoutes)
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
